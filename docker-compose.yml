@@ -1,17 +1,30 @@
 version: "3"
 
 services:
-  vite:
-    container_name: "hoangnhan-client"
+  # Vite + React
+  frontend:
+    container_name: hoangnhan-frontend
     build: ./docker/client
     stdin_open: true
     tty: true
+    working_dir: /app
     volumes:
       - ./client:/app
     ports:
-      - '3000:5173'
+      - '8000:5173'
     command: sh -c "npm install && npm run dev"
 
+  # Server
+  server:
+    container_name: hoangnhan-server
+    image: node:20-alpine
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    volumes:
+      - ./server:/app
+
+  # MySQL
   mysql:
     container_name: hoangnhan-mysql
     build: ./docker/mysql
@@ -24,3 +37,5 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
     ports:
       - '3306:3306'
+    depends_on:
+      - server
