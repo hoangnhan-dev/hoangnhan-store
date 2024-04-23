@@ -1,0 +1,12 @@
+{
+  "name": "hoangnhan-server",
+  "version": "1.0.0",
+  "description": "hoangnhan-store server side",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hoangnhandev",
+  "license": "ISC"
+}
