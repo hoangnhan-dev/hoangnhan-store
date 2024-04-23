@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  vite:
+    container_name: "hoangnhan-client"
+    build: ./docker/client
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./client:/app
+    ports:
+      - '3000:5173'
+    command: sh -c "npm install && npm run dev"
