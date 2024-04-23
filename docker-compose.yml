@@ -11,3 +11,16 @@ services:
     ports:
       - '3000:5173'
     command: sh -c "npm install && npm run dev"
+
+  mysql:
+    container_name: hoangnhan-mysql
+    build: ./docker/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    ports:
+      - '3306:3306'
