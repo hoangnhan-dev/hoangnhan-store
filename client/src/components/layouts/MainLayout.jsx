@@ -1,11 +1,13 @@
 import {Outlet} from "react-router-dom";
+import Header from "@/components/ui/Header.jsx";
+import Footer from "@/components/ui/Footer.jsx";
 
 export default function MainLayout() {
     return (
         <div>
-            <div>Header</div>
-            <div>{<Outlet />}</div>
-            <div>Footer</div>
+            <Header/>
+            <Outlet />
+            <Footer/>
         </div>
     );
 }

@@ -1,6 +1,62 @@
 @tailwind base;
+
+/*@layer base {*/
+    * {
+        @apply text-normal leading-normal;
+    }
+/*    h1 {*/
+/*        @apply text-2xl;*/
+/*    }*/
+/*    h2 {*/
+/*        @apply text-xl;*/
+/*    }*/
+/*    h3 {*/
+/*        @apply text-lg;*/
+/*    }*/
+/*    a {*/
+/*        @apply text-blue-600 underline;*/
+/*    }*/
+/*}*/
+
 @tailwind components;
+
+@layer components {
+    .header-label {
+        @apply inline-block bg-primary py-[3px] px-[6px] text-[9px] text-white leading-none rounded-[2px] font-600 absolute -translate-x-1/2 -translate-y-3;
+        &:after {
+            content: '';
+            @apply translate-y-full absolute left-1/4 bottom-0 border-x-[3px] border-x-transparent border-t-[3px] border-t-primary;
+        }
+    }
+
+}
+/*.card {*/
+/*    background-color: theme(colors.white);*/
+/*    border-radius: theme(borderRadius.lg);*/
+/*    padding: theme(spacing.6);*/
+/*    box-shadow: theme(boxShadow.xl);*/
+/*}*/
+/*}*/
+
 @tailwind utilities;
+
+@layer utilities {
+    .header-middle {
+        @apply py-[11px] bg-white w-full;
+    }
+
+    .header-logo {
+        @apply block font-bold text-header-logo;
+    }
+
+    @media screen(xl) {
+        .full-width {
+            @apply px-s6;
+        }
+    }
+}
+
+/*--------------------------------------------------------------------*/
 
 @font-face {
     font-family: 'Jost';
