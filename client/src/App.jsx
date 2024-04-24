@@ -1,12 +1,8 @@
-import './App.css'
+import {useRoutes} from "react-router-dom";
+import {router} from "@/router/index.jsx";
 
 function App() {
-
-  return (
-    <h1 className="text-3xl font-bold underline">
-        Hello world!
-    </h1>
-  )
+  return <div>{useRoutes(router)}</div>
 }
 
 export default App
