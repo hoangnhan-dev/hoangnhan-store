@@ -1,9 +1,6 @@
 @tailwind base;
 
 /*@layer base {*/
-    * {
-        @apply text-normal leading-normal;
-    }
 /*    h1 {*/
 /*        @apply text-2xl;*/
 /*    }*/
@@ -23,20 +20,23 @@
 @layer components {
     .header-label {
         @apply inline-block bg-primary py-[3px] px-[6px] text-[9px] text-white leading-none rounded-[2px] font-600 absolute -translate-x-1/2 -translate-y-3;
+
         &:after {
             content: '';
             @apply translate-y-full absolute left-1/4 bottom-0 border-x-[3px] border-x-transparent border-t-[3px] border-t-primary;
         }
     }
 
+    .badge-component {
+        .ant-scroll-number-only-unit {
+            @apply text-[10px];
+        }
+
+        .ant-badge-multiple-words {
+            @apply px-0;
+        }
+    }
 }
-/*.card {*/
-/*    background-color: theme(colors.white);*/
-/*    border-radius: theme(borderRadius.lg);*/
-/*    padding: theme(spacing.6);*/
-/*    box-shadow: theme(boxShadow.xl);*/
-/*}*/
-/*}*/
 
 @tailwind utilities;
 
@@ -47,6 +47,18 @@
 
     .header-logo {
         @apply block font-bold text-header-logo;
+    }
+
+    .header-menu-list {
+        li:hover svg path {
+            @apply fill-primary transition;
+        }
+    }
+
+    .hover-svg:hover {
+        svg {
+            @apply fill-primary transition;
+        }
     }
 
     @media screen(xl) {
