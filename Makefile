@@ -17,3 +17,6 @@ connect-server:
 
 start-server:
 	docker-compose exec server sh -c "npm run dev"
+
+install-frontend:
+	docker-compose exec frontend sh -c "npm install"
