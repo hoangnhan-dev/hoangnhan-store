@@ -11,10 +11,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ConfigProvider theme={{
               token: {
                   fontFamily: 'Jost',
+                  colorPrimary: '#111111',
               },
               components: {
                   Badge: {
                       indicatorHeight: 18,
+                  },
+                  Input: {
+                      activeBorderColor: '#111111',
+                      activeShadow: 'none',
+                      hoverBorderColor: 'none',
                   },
               },
           }}>

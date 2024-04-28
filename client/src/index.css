@@ -1,19 +1,20 @@
 @tailwind base;
 
-/*@layer base {*/
-/*    h1 {*/
-/*        @apply text-2xl;*/
-/*    }*/
-/*    h2 {*/
-/*        @apply text-xl;*/
-/*    }*/
-/*    h3 {*/
-/*        @apply text-lg;*/
-/*    }*/
-/*    a {*/
-/*        @apply text-blue-600 underline;*/
-/*    }*/
-/*}*/
+@layer base {
+    html {
+        font-size: 62.5%;
+    }
+
+    * {
+        font-size: 1.6rem;
+    }
+
+    .h4, h4 {
+        font-size: clamp(2rem, 3vw, theme(fontSize.h4));
+        margin-bottom: clamp(1rem, 3vw, 2rem);
+        @apply font-500 tracking-normal text-heading leading-heading;
+    }
+}
 
 @tailwind components;
 
@@ -36,6 +37,42 @@
             @apply px-0;
         }
     }
+
+    .search-input {
+        @apply border border-inputBorder rounded-inputBorder transition;
+
+        &:focus-within {
+            @apply border-heading;
+        }
+
+        .ant-input-group-addon {
+            @apply bg-transparent;
+        }
+
+        .ant-input {
+            @apply py-6 rounded-inputBorder border-none shadow-none pl-8;
+        }
+
+        .ant-btn {
+            @apply bg-transparent border-none !text-heading;
+
+            &:hover {
+                @apply !bg-transparent text-heading;
+            }
+
+            svg {
+                @apply size-8;
+            }
+
+            div {
+                @apply shadow-none;
+            }
+        }
+
+        .ant-btn.ant-btn-icon-only {
+            width: 57px;
+        }
+    }
 }
 
 @tailwind utilities;
@@ -46,7 +83,7 @@
     }
 
     .header-logo {
-        @apply block font-bold text-header-logo;
+        @apply block font-bold text-headerLogo;
     }
 
     .header-menu-list {
@@ -61,9 +98,21 @@
         }
     }
 
+    .container-fluid {
+        @apply mx-auto w-full;
+        max-width: calc(var(--container-fluid-width) + var(--gutter-x));
+        padding-right: calc(var(--bs-gutter-x)* .5);
+        padding-left: calc(var(--bs-gutter-x)* .5);
+    }
+
     @media screen(xl) {
+        :root {
+            --container-fluid-width: 1410px;
+            --gutter-x: 6rem;
+        }
+
         .full-width {
-            @apply px-s6;
+            @apply px-24;
         }
     }
 }
