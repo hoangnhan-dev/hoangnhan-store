@@ -10,9 +10,13 @@
     }
 
     .h4, h4 {
-        font-size: clamp(2rem, 3vw, theme(fontSize.h4));
+        font-size: clamp(2rem, 3vw, 32px);
         margin-bottom: clamp(1rem, 3vw, 2rem);
         @apply font-500 tracking-normal text-heading leading-heading;
+    }
+
+    a, a:hover {
+       @apply text-heading;
     }
 }
 
@@ -29,12 +33,33 @@
     }
 
     .badge-component {
+        .ant-badge-count {
+            @apply flex items-center justify-center;
+        }
         .ant-scroll-number-only-unit {
-            @apply text-[10px];
+            @apply text-[10px] block leading-[18px];
         }
 
         .ant-badge-multiple-words {
             @apply px-0;
+        }
+    }
+
+    .search-drawer.ant-drawer {
+        .ant-drawer-header {
+            @apply border-b-0 justify-end;
+
+            .ant-drawer-header-title {
+                @apply flex-none;
+
+                .ant-drawer-close:hover {
+                    @apply text-heading bg-transparent;
+                }
+            }
+        }
+
+        .ant-drawer-body {
+            @apply p-0;
         }
     }
 
@@ -73,6 +98,18 @@
             width: 57px;
         }
     }
+
+    .card, .ant-card {
+        @apply !shadow-none;
+
+        .ant-card-cover {
+            @apply rounded-product overflow-hidden;
+        }
+
+        .ant-card-body {
+            @apply px-0 p-0 pt-6;
+        }
+    }
 }
 
 @tailwind utilities;
@@ -101,8 +138,8 @@
     .container-fluid {
         @apply mx-auto w-full;
         max-width: calc(var(--container-fluid-width) + var(--gutter-x));
-        padding-right: calc(var(--bs-gutter-x)* .5);
-        padding-left: calc(var(--bs-gutter-x)* .5);
+        padding-right: calc(var(--gutter-x)* .5);
+        padding-left: calc(var(--gutter-x)* .5);
     }
 
     @media screen(xl) {

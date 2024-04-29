@@ -9,7 +9,8 @@ import CartIcon from "@/components/ui/svg/CartIcon.jsx";
 import Badge from '@/components/ui/antd/Badge.jsx';
 import Drawer from "@/components/ui/antd/Drawer.jsx";
 import {SearchInput} from "@/components/ui/antd/Input.jsx";
-import {CardMeta} from "@/components/ui/antd/Card.jsx";
+import ProductCard from "@/components/ui/ProductCard.jsx";
+import {useState} from "react";
 
 const menuList = [
     {
@@ -36,7 +37,61 @@ const menuList = [
     },
 ];
 
+const popularProducts = [
+    {
+        id: 1,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+        discount: 20,
+    },
+    {
+        id: 2,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+        discount: 20,
+    },
+    {
+        id: 3,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+    },
+    {
+        id: 4,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+    },
+    {
+        id: 5,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+        discount: 20,
+    },
+    {
+        id: 6,
+        brand: 'Umino',
+        name: 'UMINO JUNIPER TRAIL 2 NEXT NATURE',
+        src: 'https://umino-demo.myshopify.com/cdn/shop/files/products_sport_2_1.jpg?v=1684399295&width=360',
+        price: 120,
+    },
+];
+
 export default function Header() {
+    const [toggle, setToggle] = useState({
+        search: false,
+    });
+
+    const handleSetOpen = (cbSetValue) => () => setToggle(cbSetValue);
+
     return (
         <div className="header header-middle">
             <div className="grid grid-cols-3 items-center full-width">
@@ -56,7 +111,7 @@ export default function Header() {
                                        className="text-heading hover:text-primary transition font-500">{item.content}</a>
                                     {
                                         item?.badgeFlag && (
-                                            <a href="#" className="header-label">{item?.badgeFlag}</a>
+                                            <a href="#" className="header-label hover:text-white">{item?.badgeFlag}</a>
                                         )
                                     }
                                 </div>
@@ -77,15 +132,14 @@ export default function Header() {
                 <div>
                     <ul className="flex items-center justify-end *:ml-4 pr-[9px]">
                         <li>
-                            <button className="hover-svg"><SearchIcon/></button>
+                            <button className="hover-svg" onClick={handleSetOpen(pre => ({...pre, search: true}))}><SearchIcon/></button>
                         </li>
                         <li>
                             <button className="hover-svg"><UserIcon/></button>
                         </li>
                         <li><a href="#" className="relative -top-0.5 hover-svg"><RecentIcon/></a></li>
                         <li>
-                            <Badge count={20}><a href="#"
-                                                 className="relative top-0.5 hover-svg"><HeartIcon/></a></Badge>
+                            <Badge count={2}><a href="#" className="relative top-0.5 hover-svg"><HeartIcon/></a></Badge>
                         </li>
                         <li>
                             <Badge count={15}>
@@ -97,7 +151,7 @@ export default function Header() {
             </div>
 
             {/* Search Drawer */}
-            <Drawer open={true} placement="top">
+            <Drawer open={toggle.search} onClose={handleSetOpen(pre => ({...pre, search: false}))} placement="top" height="90vh" rootClassName="search-drawer">
                 <div className="container-fluid">
                     {/*Search box */}
                     <h4 className="text-center">Search Our Site</h4>
@@ -119,11 +173,11 @@ export default function Header() {
 
                     {/*Popular product */}
                     <div className="mt-8">
-                        <h5>Popular Products</h5>
-                        <div className="mt-8 grid gap-4 grid-cols-6">
+                        <h5 className="text-[2rem] font-500 leading-heading">Popular Products</h5>
+                        <div className="mt-8 grid gap-8 grid-cols-6">
                             {
-                                [...Array(6)].map((_) => (
-                                    <CardMeta></CardMeta>
+                                popularProducts.map(product => (
+                                    <ProductCard key={product.id} product={product}/>
                                 ))
                             }
                         </div>

@@ -26,9 +26,12 @@ export default {
       },
       borderRadius: {
         inputBorder: '30px',
+        product: '10px',
       },
       fontSize: {
-        normal: '16px',
+        small: '12px',
+        normal: '14px',
+        large: '16px',
         headerLogo: '30px',
         h4: '32px',
       },
