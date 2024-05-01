@@ -1,6 +1,17 @@
 @tailwind base;
 
 @layer base {
+    :root {
+        --primary-color: #dd3327;
+        --text-heading-color: #111111;
+
+        --input-border-color: #ebebeb;
+        --input-border-focus-color: #111111;
+        --input-border-radius: 30px;
+
+        --card-product-radius: 10px;
+    }
+
     html {
         font-size: 62.5%;
     }
@@ -23,46 +34,7 @@
 @tailwind components;
 
 @layer components {
-    .header-label {
-        @apply inline-block bg-primary py-[3px] px-[6px] text-[9px] text-white leading-none rounded-[2px] font-600 absolute -translate-x-1/2 -translate-y-3;
-
-        &:after {
-            content: '';
-            @apply translate-y-full absolute left-1/4 bottom-0 border-x-[3px] border-x-transparent border-t-[3px] border-t-primary;
-        }
-    }
-
-    .badge-component {
-        .ant-badge-count {
-            @apply flex items-center justify-center;
-        }
-        .ant-scroll-number-only-unit {
-            @apply text-[10px] block leading-[18px];
-        }
-
-        .ant-badge-multiple-words {
-            @apply px-0;
-        }
-    }
-
-    .search-drawer.ant-drawer {
-        .ant-drawer-header {
-            @apply border-b-0 justify-end;
-
-            .ant-drawer-header-title {
-                @apply flex-none;
-
-                .ant-drawer-close:hover {
-                    @apply text-heading bg-transparent;
-                }
-            }
-        }
-
-        .ant-drawer-body {
-            @apply p-0;
-        }
-    }
-
+    /* Search Input Component */
     .search-input {
         @apply border border-inputBorder rounded-inputBorder transition;
 
@@ -99,7 +71,8 @@
         }
     }
 
-    .card, .ant-card {
+    /* Card Product Component */
+    .card-product, .ant-card {
         @apply !shadow-none;
 
         .ant-card-cover {
@@ -115,31 +88,15 @@
 @tailwind utilities;
 
 @layer utilities {
-    .header-middle {
-        @apply py-[11px] bg-white w-full;
-    }
-
-    .header-logo {
-        @apply block font-bold text-headerLogo;
-    }
-
-    .header-menu-list {
-        li:hover svg path {
-            @apply fill-primary transition;
-        }
-    }
-
-    .hover-svg:hover {
-        svg {
-            @apply fill-primary transition;
-        }
-    }
-
     .container-fluid {
         @apply mx-auto w-full;
         max-width: calc(var(--container-fluid-width) + var(--gutter-x));
         padding-right: calc(var(--gutter-x)* .5);
         padding-left: calc(var(--gutter-x)* .5);
+    }
+
+    .transition {
+        transition: all .2s linear;
     }
 
     @media screen(xl) {
@@ -153,8 +110,6 @@
         }
     }
 }
-
-/*--------------------------------------------------------------------*/
 
 @font-face {
     font-family: 'Jost';

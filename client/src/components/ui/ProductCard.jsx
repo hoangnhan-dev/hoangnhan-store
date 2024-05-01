@@ -8,6 +8,7 @@ export default function ProductCard({product, ...props}) {
             cover={<img alt={name + brand} src={src} className="!rounded-product aspect-square hover:scale-105 transition"/>}
             bordered={false}
             hoverable
+            rootClassName="card-product"
         >
             <div className="my-[4px] uppercase text-small font-600 text-[#999]">{brand}</div>
             <h3><a href="#" className="text-normal font-600">{name}</a></h3>

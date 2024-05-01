@@ -11,6 +11,7 @@ import Drawer from "@/components/ui/antd/Drawer.jsx";
 import {SearchInput} from "@/components/ui/antd/Input.jsx";
 import ProductCard from "@/components/ui/ProductCard.jsx";
 import {useState} from "react";
+import styled from "styled-components";
 
 const menuList = [
     {
@@ -93,57 +94,68 @@ export default function Header() {
     const handleSetOpen = (cbSetValue) => () => setToggle(cbSetValue);
 
     return (
-        <div className="header header-middle">
+        <HeaderStyled className="header py-[11px] bg-white w-full">
             <div className="grid grid-cols-3 items-center full-width">
                 {/* Logo */}
                 <div>
-                    <a href="#" className="header-logo">HOANGNHAN</a>
+                    <a href="#" className="block font-bold text-headerLogo">HOANGNHAN</a>
                 </div>
 
                 {/* Menu */}
-                <ul className="header-menu-list flex flex-wrap items-center justify-center">
+                <ul className="flex flex-wrap items-center justify-center">
                     {
                         menuList.map(item => (
                             <li key={item.content}
                                 className={clsx("py-8 px-12", item?.pullDown && "flex items-center")}>
                                 <div className="relative">
                                     <a href={item.to}
-                                       className="text-heading hover:text-primary transition font-500">{item.content}</a>
-                                    {
-                                        item?.badgeFlag && (
-                                            <a href="#" className="header-label hover:text-white">{item?.badgeFlag}</a>
-                                        )
-                                    }
+                                       className="flex text-heading transition font-500 hover:text-primary">
+                                        <span>{item.content}</span>
+                                        {
+                                            item?.badgeFlag && (
+                                                <a
+                                                    href="#"
+                                                    className="inline-block bg-primary py-[3px] px-[6px] text-[9px] text-white leading-none rounded-[2px] font-600 absolute translate-x-3/4 -translate-y-4 hover:text-white after:content-[''] after:translate-y-full after:absolute after:left-2 after:bottom-0 after:border-x-[3px] after:border-x-transparent after:border-t-[3px] after:border-t-primary"
+                                                >
+                                                    {item?.badgeFlag}
+                                                </a>
+                                            )
+                                        }
+                                        {
+                                            item?.pullDown && (
+                                                <div
+                                                    className="pl-2 text-submenu text-[10px] cursor-pointer *:size-2.5">
+                                                    <FontAwesomeIcon icon={faAngleDown}/>
+                                                </div>
+                                            )
+                                        }
+                                    </a>
                                 </div>
-                                {
-                                    item?.pullDown && (
-                                        <div
-                                            className="pl-2 text-submenu text-[10px] cursor-pointer *:size-2.5">
-                                            <FontAwesomeIcon icon={faAngleDown}/>
-                                        </div>
-                                    )
-                                }
                             </li>
                         ))
                     }
                 </ul>
 
                 {/* Submenu */}
-                <div>
+                <div className="header-submenu">
                     <ul className="flex items-center justify-end *:ml-4 pr-[9px]">
                         <li>
-                            <button className="hover-svg" onClick={handleSetOpen(pre => ({...pre, search: true}))}><SearchIcon/></button>
+                            <button className="header-icon" onClick={handleSetOpen(pre => ({...pre, search: true}))}>
+                                <SearchIcon/>
+                            </button>
                         </li>
                         <li>
-                            <button className="hover-svg"><UserIcon/></button>
+                            <button className="header-icon"><UserIcon/></button>
                         </li>
-                        <li><a href="#" className="relative -top-0.5 hover-svg"><RecentIcon/></a></li>
+                        <li><a href="#" className="relative -top-0.5 header-icon"><RecentIcon/></a></li>
                         <li>
-                            <Badge count={2}><a href="#" className="relative top-0.5 hover-svg"><HeartIcon/></a></Badge>
+                            <Badge showZero count={2} rootClassName="header-badge">
+                                <a href="#" className="relative top-0.5 header-icon"><HeartIcon/></a>
+                            </Badge>
                         </li>
                         <li>
-                            <Badge count={15}>
-                                <button className="relative top-0.5 hover-svg"><CartIcon/></button>
+                            <Badge showZero count={15} rootClassName="header-badge">
+                                <button className="relative top-0.5 header-icon"><CartIcon/></button>
                             </Badge>
                         </li>
                     </ul>
@@ -184,6 +196,36 @@ export default function Header() {
                     </div>
                 </div>
             </Drawer>
-        </div>
+        </HeaderStyled>
     );
 }
+
+const HeaderStyled = styled.div`
+    .header-submenu {
+        .header-badge {
+            .ant-badge-count {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--primary-color);
+            }
+            .ant-scroll-number-only-unit {
+                font-size: 10px;
+                display: block;
+                line-height: 18px;
+            }
+
+            .ant-badge-multiple-words {
+                padding-left: 0;
+                padding-right: 0;
+            }   
+        }
+        
+        .header-icon:hover {
+            svg {
+                fill: var(--primary-color);
+                transition: all .2s linear;
+            }
+        }
+    }
+`;
