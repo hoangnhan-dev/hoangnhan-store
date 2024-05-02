@@ -17,16 +17,20 @@ export default {
     },
     extend: {
       colors: {
+        baseColor: '#555555',
         grey: '#555555',
         heading: '#111111',
         primary: '#dd3327',
         btnPrimaryBg: '#111111',
+        btnPrimaryColor: '#ffffff',
+        btnPrimaryBorder: '#111111',
         submenu: '#555555',
         inputBorder: '#ebebeb',
       },
       borderRadius: {
         inputBorder: '30px',
         product: '10px',
+        btn: '30px',
       },
       fontSize: {
         small: '12px',
@@ -45,6 +49,9 @@ export default {
         heading: 1.3,
         normal: 1.75,
       },
+      spacing: {
+        inputHeight: '50px',
+      }
     },
   },
   plugins: [],

@@ -2,14 +2,19 @@
 
 @layer base {
     :root {
+        --base-color: #555555;
         --primary-color: #dd3327;
         --text-heading-color: #111111;
+        --grey-color: #555555;
 
         --input-border-color: #ebebeb;
         --input-border-focus-color: #111111;
         --input-border-radius: 30px;
+        --input-height: 50px;
 
         --card-product-radius: 10px;
+
+        --btn-link-color: #111111;
     }
 
     html {
@@ -18,6 +23,11 @@
 
     * {
         font-size: 1.6rem;
+    }
+
+    h3, .h3, .h5, h5 {
+        font-weight: 500;
+        line-height: 1;
     }
 
     .h4, h4 {
@@ -81,6 +91,31 @@
 
         .ant-card-body {
             @apply px-0 p-0 pt-6;
+        }
+    }
+
+    /*  Input Component  */
+    .primary-input {
+        @apply h-inputHeight rounded-inputBorder px-8 py-4 mb-6 text-baseColor;
+    }
+
+    /* Base Button */
+    .btn {
+        @apply rounded-btn h-[50px] w-full;
+        span {
+            @apply font-600 uppercase text-small;
+        }
+    }
+
+    /* Primary Button */
+    .primary-btn {
+        @apply !bg-btnPrimaryBg !text-btnPrimaryColor border border-btnPrimaryBorder;
+    }
+
+    /* Secondary Button */
+    .secondary-btn {
+        &:hover {
+            @apply !bg-btnPrimaryBg !text-btnPrimaryColor;
         }
     }
 }

@@ -8,10 +8,12 @@ import HeartIcon from "@/components/ui/svg/HeartIcon.jsx";
 import CartIcon from "@/components/ui/svg/CartIcon.jsx";
 import Badge from '@/components/ui/antd/Badge.jsx';
 import Drawer from "@/components/ui/antd/Drawer.jsx";
-import {SearchInput} from "@/components/ui/antd/Input.jsx";
+import Input, {SearchInput} from "@/components/ui/antd/Input.jsx";
 import ProductCard from "@/components/ui/ProductCard.jsx";
 import {useState} from "react";
 import styled from "styled-components";
+import Modal from "@/components/ui/antd/Modal.jsx";
+import Button from "@/components/ui/antd/Button.jsx";
 
 const menuList = [
     {
@@ -89,6 +91,8 @@ const popularProducts = [
 export default function Header() {
     const [toggle, setToggle] = useState({
         search: false,
+        login: false,
+        isLogin: true,
     });
 
     const handleSetOpen = (cbSetValue) => () => setToggle(cbSetValue);
@@ -145,7 +149,9 @@ export default function Header() {
                             </button>
                         </li>
                         <li>
-                            <button className="header-icon"><UserIcon/></button>
+                            <button className="header-icon" onClick={handleSetOpen(pre => ({...pre, login: true}))}>
+                                <UserIcon/>
+                            </button>
                         </li>
                         <li><a href="#" className="relative -top-0.5 header-icon"><RecentIcon/></a></li>
                         <li>
@@ -163,7 +169,13 @@ export default function Header() {
             </div>
 
             {/* Search Drawer */}
-            <Drawer open={toggle.search} onClose={handleSetOpen(pre => ({...pre, search: false}))} placement="top" height="90vh" rootClassName="search-drawer">
+            <Drawer
+                open={toggle.search}
+                onClose={handleSetOpen(pre => ({...pre, search: false}))}
+                placement="top"
+                height="90vh"
+                rootClassName="search-drawer"
+            >
                 <div className="container-fluid">
                     {/*Search box */}
                     <h4 className="text-center">Search Our Site</h4>
@@ -196,6 +208,61 @@ export default function Header() {
                     </div>
                 </div>
             </Drawer>
+
+            {/* Login modal */}
+            <Modal
+                open={toggle.login}
+                footer={null}
+                onCancel={handleSetOpen(pre => ({...pre, login: false, isLogin: true}))}
+            >
+                {
+                    toggle.isLogin ? (
+                        <div>
+                            <h3 className="pt-14 text-center text-[24px]">Login</h3>
+                            <form action="#" className="px-16 pb-16 pt-14">
+                                <div>
+                                    <Input placeholder="Your email*" rootClassName="primary-input"/>
+                                    <Input placeholder="Password*" rootClassName="primary-input"/>
+                                </div>
+                                <a href="#" className="!text-baseColor">Forgot your password?</a>
+                                <div className="mt-12">
+                                    <div>
+                                        <Button rootClassName="btn primary-btn">Login</Button>
+                                    </div>
+                                    <div className="mt-8">
+                                        <Button rootClassName="btn secondary-btn"
+                                                onClick={handleSetOpen(pre => ({...pre, isLogin: false}))}>Create
+                                            Account</Button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    ) : (
+                        <div>
+                            <h3 className="pt-14 text-center text-[24px]">Create Account</h3>
+                            <form action="#" className="px-16 pb-16 pt-14">
+                                <div>
+                                    <Input placeholder="First name" rootClassName="primary-input"/>
+                                    <Input placeholder="Last name" rootClassName="primary-input"/>
+                                    <Input placeholder="Your email*" rootClassName="primary-input"/>
+                                    <Input placeholder="Password*" rootClassName="primary-input"/>
+                                </div>
+                                <p className="!text-baseColor text-normal">Your personal data will be used to support
+                                    your experience throughout this website, to manage access to your account and for
+                                    other purposes described in our privacy policy.</p>
+                                <div className="mt-12">
+                                    <div>
+                                        <Button rootClassName="btn primary-btn">Login</Button>
+                                    </div>
+                                    <div className="mt-8">
+                                        <Button rootClassName="btn secondary-btn">Create Account</Button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    )
+                }
+            </Modal>
         </HeaderStyled>
     );
 }
@@ -209,6 +276,7 @@ const HeaderStyled = styled.div`
                 align-items: center;
                 background-color: var(--primary-color);
             }
+
             .ant-scroll-number-only-unit {
                 font-size: 10px;
                 display: block;
@@ -218,9 +286,9 @@ const HeaderStyled = styled.div`
             .ant-badge-multiple-words {
                 padding-left: 0;
                 padding-right: 0;
-            }   
+            }
         }
-        
+
         .header-icon:hover {
             svg {
                 fill: var(--primary-color);
