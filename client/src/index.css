@@ -46,7 +46,7 @@
 @layer components {
     /* Search Input Component */
     .search-input {
-        @apply border border-inputBorder rounded-inputBorder transition;
+        @apply border border-borderBase rounded-inputBorder transition;
 
         &:focus-within {
             @apply border-heading;

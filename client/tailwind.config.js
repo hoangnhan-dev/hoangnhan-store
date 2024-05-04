@@ -25,7 +25,8 @@ export default {
         btnPrimaryColor: '#ffffff',
         btnPrimaryBorder: '#111111',
         submenu: '#555555',
-        inputBorder: '#ebebeb',
+        borderBase: '#ebebeb',
+        lightGrey: '#f5f5f5',
       },
       borderRadius: {
         inputBorder: '30px',
@@ -36,6 +37,7 @@ export default {
         small: '12px',
         normal: '14px',
         large: '16px',
+        extraLarge: '18px',
         headerLogo: '30px',
         h4: '32px',
       },

@@ -14,6 +14,8 @@ import {useState} from "react";
 import styled from "styled-components";
 import Modal from "@/components/ui/antd/Modal.jsx";
 import Button from "@/components/ui/antd/Button.jsx";
+import FreeshippingIcon from "@/components/ui/svg/FreeshippingIcon.jsx";
+import CartEmptyIcon from "@/components/ui/svg/CartEmptyIcon.jsx";
 
 const menuList = [
     {
@@ -93,7 +95,9 @@ export default function Header() {
         search: false,
         login: false,
         isLogin: true,
+        cart: false,
     });
+    const [cartShipping, setCartShipping] = useState(false);
 
     const handleSetOpen = (cbSetValue) => () => setToggle(cbSetValue);
 
@@ -142,7 +146,7 @@ export default function Header() {
 
                 {/* Submenu */}
                 <div className="header-submenu">
-                    <ul className="flex items-center justify-end *:ml-4 pr-[9px]">
+                    <ul className="flex items-center justify-end *:ml-8 pr-[9px]">
                         <li>
                             <button className="header-icon" onClick={handleSetOpen(pre => ({...pre, search: true}))}>
                                 <SearchIcon/>
@@ -160,7 +164,7 @@ export default function Header() {
                             </Badge>
                         </li>
                         <li>
-                            <Badge showZero count={15} rootClassName="header-badge">
+                            <Badge showZero count={15} rootClassName="header-badge" onClick={handleSetOpen(pre => ({...pre, cart: true}))}>
                                 <button className="relative top-0.5 header-icon"><CartIcon/></button>
                             </Badge>
                         </li>
@@ -263,6 +267,36 @@ export default function Header() {
                     )
                 }
             </Modal>
+
+            {/* Cart Drawer */}
+            <CartDrawerStyled
+                open={toggle.cart}
+                onClose={handleSetOpen(pre => ({...pre, cart: false}))}
+                placement="right"
+                width="450px"
+                title={<h4 className="text-[18px] mb-0">Shopping Cart (0)</h4>}
+                headerStyle={{ padding: '14px 30px'}}
+            >
+                <div className="pt-14 px-12 pb-8 bg-lightGrey">
+                    <div className={clsx('relative h-2 w-full rounded-[5px] mb-[12px]', cartShipping ? 'bg-primary' : ' bg-borderBase')}>
+                        <span
+                            className={clsx('absolute size-12 rounded-full border border-primary flex items-center justify-center -translate-y-1/2 bg-white',
+                                cartShipping && 'right-0')}>
+                            <FreeshippingIcon/>
+                        </span>
+                    </div>
+                    <div className="text-normal">Spend $100.00 more to enjoy <span className="text-normal text-primary font-500">FREE SHIPPING</span>!</div>
+                </div>
+                <div className="pt-20 pb-12 px-12">
+                    <div className="flex flex-col items-center justify-between">
+                        <div className="mb-[16px]"><CartEmptyIcon/></div>
+                        <span className="mb-4 font-500 text-extraLarge">Your cart is empty.</span>
+                        <span className="mb-4 text-large text-center">You may check out all the available products and buy some in the shop.</span>
+                        <Button rootClassName="btn primary-btn mt-12 w-1/2" onClick={handleSetOpen(pre => ({...pre, cart: false}))}>Return to shop</Button>
+                    </div>
+                </div>
+            </CartDrawerStyled>
+
         </HeaderStyled>
     );
 }
@@ -294,6 +328,21 @@ const HeaderStyled = styled.div`
                 fill: var(--primary-color);
                 transition: all .2s linear;
             }
+        }
+    }
+`;
+
+const CartDrawerStyled = styled(Drawer)`
+    .ant-drawer-header {
+        .ant-drawer-header-title {
+            width: 100%;
+            align-items: center;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
+        
+        .ant-drawer-close {
+            margin-right: 0;
         }
     }
 `;
